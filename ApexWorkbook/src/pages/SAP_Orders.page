@@ -1,0 +1,56 @@
+<apex:page standardController="Account" extensions="SapOrdersAccountControllerExtension">
+  <style>
+    td {
+    border-bottom-color: rgb(224, 227, 229);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 2px;
+    padding-top: 5px;
+    font-size:12px;
+    }
+    th {
+    border-color: rgb(224, 227, 229);
+    border-style: solid;
+    border-width: 1px;
+    background-color: #F7F7F7;
+    border-collapse: separate;
+    font-size: 11px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 2px;
+    padding-top: 5px;
+    }
+    table {
+    border-color: rgb(224, 227, 229);
+    border-style: solid;
+    border-width: 1px;
+    }
+  </style>
+  <apex:dataTable value="{!orderList}" var="order" width="100%">
+    <apex:column >
+    <apex:facet name="header">Id</apex:facet>
+    <apex:outputText ><a target="_top" href="/x/SalesOrder__x/{!order.ExternalId}">{!order.ExternalId}</a></apex:outputText>
+    </apex:column>
+    <apex:column >
+    <apex:facet name="header">Note</apex:facet>
+    <apex:outputText >{!order.note__c}</apex:outputText>
+    </apex:column>
+    <apex:column >
+    <apex:facet name="header">Currency</apex:facet>
+    <apex:outputText style="float:right" >{!order.currency__c}</apex:outputText>
+    </apex:column>
+    <apex:column >
+    <apex:facet name="header">NetSum</apex:facet>
+    <apex:outputText >{!order.netSum__c}</apex:outputText>
+    </apex:column>
+    <apex:column >
+    <apex:facet name="header">TotalSum</apex:facet>
+    <apex:outputText >{!order.totalSum__c}</apex:outputText>
+    </apex:column>
+  </apex:dataTable>  
+</apex:page>

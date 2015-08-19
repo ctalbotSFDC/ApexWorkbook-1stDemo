@@ -1,0 +1,93 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" controller="AppsController">
+<html lang="en">
+  <head>
+       
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+     
+<script src="/faces/a4j/g/3_3_3.Finalorg.ajax4jsf.javascript.AjaxScript?rel=1398474301000" type="text/javascript"></script><script src="/static/111213/js/perf/stub.js"></script><style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
+
+  </head>  
+  
+  <body>
+<meta charset="utf-8"></meta>
+    <title>blank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta> 
+    <!--insert css here -->
+    <link rel="stylesheet" href="{!$Resource.applicationcss}" />
+    <style>
+        #q {
+            height: 18px;
+            padding-left: 5px;
+            margin-bottom: 10px;
+            margin-top: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+        }
+        #AppBodyHeader .phHeader {
+            background-color: #610c1c;
+            }
+        
+        body.sfdcBody {
+            background-color: #610c1c;
+            background:#610c1c
+            }
+            
+            .Custom51Tab .brdPalette {
+            border-top-color: #ffffff;
+            }
+            .zen .zen-headerBottom {
+            background: linear-gradient(#ffffff, #ffffff);
+            }
+            .Custom51Tab .primaryPalette, .individualPalette .Custom51Block .primaryPalette {
+            background-color: #610c1c;
+            border-color: #610c1c;
+            }
+            #tsidButton, #helpNavButton, #notificationsNavButton, #userNavButton {
+            background: #610c1c;
+            }
+        
+        .headerSearchRightRoundedCorner #phSearchButton {
+        color: #610c1c;
+        }
+        .phHeaderCustomLogo #helpNavLabel, .phHeaderCustomLogo #notificationsNavLabel, .phHeaderCustomLogo #userNavLabel {
+        color: #ffffff;
+        }
+        body .phHeaderCustomLogo .multiforce .navLinks a {
+        color: #ffffff;
+        }
+        .phHeaderCustomLogo #tsidButton {
+        background-color: #610c1c;
+        }
+        .phHeader .mbrButtonArrow, .phHeaderCustomLogo .menuButtonOver .mbrButtonArrow {
+        background: url(/img/alohaSkin/header_mutton.png) 0 -129px no-repeat;
+        }
+        
+        
+        #logout {
+            margin-left:20px;
+        }
+        
+        #appcontainer {
+            padding-top:20px;        
+        }
+        
+        .fav { 
+            margin-left:10px;
+        }
+        
+        .icon {
+            margin-top:2px;
+        }
+    </style>
+<!-- navbar -->
+
+    
+  </body>
+</html>
+
+</apex:page>

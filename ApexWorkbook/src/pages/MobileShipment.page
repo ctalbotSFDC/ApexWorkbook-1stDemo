@@ -1,0 +1,75 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Ratchet, 'ratchet.css')}"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.MobilePack, 'css/responsive.css')}"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.MobilePack, 'css/styles.css')}"/>
+            
+        <script src="{!URLFOR($Resource.MobilePack, 'js/libs.min.js')}"></script>
+        <script src="{!URLFOR($Resource.MobilePack, 'js/forcejs.min.js')}"></script>
+        <script src="{!URLFOR($Resource.MobilePack, 'js/force.entity.js')}"></script>
+        <script src="{!URLFOR($Resource.MobilePack, 'js/mobile-ui-elements.js')}"></script>
+        <script src="{!URLFOR($Resource.MobilePack, 'js/jq-slide.js')}"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+    </head>
+
+
+    <body>
+        <div id="home" class="absolute">
+            <header class="bar-title">
+              <h1 class="title">Shipments</h1>
+              <a class="button" onClick="showEdit(true);">Add</a>
+            </header>
+            <div class="content">
+            
+                <!-- SF-ROLE="list" renders a list of records on the page from a sobject -->
+                <div id="contact-list" sf-role="list" sf-sobject="Shipment__c"></div>
+                
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+<div id="detail" style="display: none;" class="absolute">
+            <header class="bar-title">
+                <a class="button-prev" onClick="showHome('#detail');">Back</a>
+                <h1 class="title">Details</h1>
+                <a class="button" onClick="showEdit();">Edit</a>
+            </header>
+            
+            
+            <div class="content">
+            
+                <!-- SF-ROLE="detail" renders a detail layout of record on the page from a sobject. Also renders edit page. -->
+                <div id="contact-detail" sf-role="detail" sf-sobject="Shipment__c"></div>
+                
+            </div>
+        </div>
+        <!-- END STEP 2 -->
+
+        <!-- STEP 3 -->
+
+        <div id="edit" class="modal">
+            <header class="bar-title">
+                <a class="button" onClick="closeForm();">Close</a>
+                <h1 class="title">Edit</h1>
+                <a class="button" onClick="saveForm();">Save</a>
+            </header>
+            <div class="content">
+                <div id="contact-edit"></div>
+            </div>
+        </div>
+        <!-- END STEP 3 -->
+        
+    </body>
+    
+    <script>
+        $(function() {
+            SFDC.launch({
+                accessToken: '{!$Api.Session_ID}',
+                instanceUrl: '{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9)-1)}',
+                useProxy: true
+            });
+        });
+    </script>
+    <script src="{!URLFOR($Resource.MobileApp)}"></script>
+</apex:page>

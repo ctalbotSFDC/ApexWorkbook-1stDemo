@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is where users can create a request for a code review</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Date_Completed_2nd_Review__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Completed 2nd Review</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Date_Initial_Completed__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Initial Completed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Id</formula>
+        <label>Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Issues_Found__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Issues found in this review</inlineHelpText>
+        <label>Number of Issues Found</label>
+        <summaryForeignKey>Review_Results__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Issues_Found_in_Multi_Objects__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Issues Found in Multi Objects</label>
+        <summaryFilterItems>
+            <field>Review_Results__c.Multiple__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Review_Results__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Objects__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Objects</label>
+        <summaryForeignKey>Apex_Class_List__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Review_Objects__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of objects to be reviewed</inlineHelpText>
+        <label>Number of Review Objects</label>
+        <summaryForeignKey>Apex_Class_List__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Yellow_Issues__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Yellow Issues found</inlineHelpText>
+        <label>Number of Yellow Issues</label>
+        <summaryFilterItems>
+            <field>Review_Results__c.Fix_Color__c</field>
+            <operation>equals</operation>
+            <value>Yellow</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Review_Results__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Other_Review_Environment__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If &quot;Other&quot; is selected for the review environment, please identify the sandbox here</inlineHelpText>
+        <label>Other Review Environment</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Red_Issues__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of red issues found</inlineHelpText>
+        <label>Red Issues</label>
+        <summaryFilterItems>
+            <field>Review_Results__c.Fix_Color__c</field>
+            <operation>equals</operation>
+            <value>Red</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Review_Results__c.Review_Request__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Requested_On__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Date/Time request submitted</inlineHelpText>
+        <label>Requested On</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Requestor__c</fullName>
+        <defaultValue>$User.FirstName + &quot; &quot; + $User.LastName</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Who is requesting the review</inlineHelpText>
+        <label>Requestor</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Review_Environment__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Which environment should this review be done in?</inlineHelpText>
+        <label>Review Environment</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Config1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CTIInt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>QATest</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SCP2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SCPDev</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>UAT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reviewer__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Who is currently assigned to review the code</inlineHelpText>
+        <label>Reviewer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Current status of request</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Requested</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed-Initial</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Review Requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Review In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Review On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Review Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Target_Release_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date targeted for releasing this new code</inlineHelpText>
+        <label>Target Release Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Review Request</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Requested_On__c</columns>
+        <columns>Requestor__c</columns>
+        <columns>Review_Environment__c</columns>
+        <columns>Status__c</columns>
+        <columns>Number_of_Issues_Found__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <language>en_US</language>
+    </listViews>
+    <nameField>
+        <displayFormat>RR-{0000}</displayFormat>
+        <label>Review Request Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Review Requests</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Requested_On__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Requestor__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Review_Environment__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Number_of_Issues_Found__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Requested_On__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Requestor__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Review_Environment__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Number_of_Issues_Found__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Must_specify_environment_name</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(ispickval(Review_Environment__c, &apos;Other&apos;),  IF(ISNULL( Other_Review_Environment__c ), true, false) , false)</errorConditionFormula>
+        <errorDisplayField>Other_Review_Environment__c</errorDisplayField>
+        <errorMessage>You must specify the environment name - if you chose Other, you must enter the name in the Other Review Environment field.</errorMessage>
+    </validationRules>
+</CustomObject>

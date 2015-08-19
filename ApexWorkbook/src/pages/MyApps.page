@@ -1,0 +1,41 @@
+<apex:page controller="MyAppMenuItems">
+  <!-- Begin Default Content REMOVE THIS -->
+
+  <apex:pageBlock title="Connected Apps">
+  <apex:pageBlockSection title="Section" columns="1">
+  <apex:pageBlockTable value="{!appmenuitems}" var="aitem">
+      <apex:column headerValue="Id">
+          <apex:outputText value="{!aitem.Id}"/>
+      </apex:column>
+      <apex:column headerValue="App Name">
+          <apex:outputText value="{!aitem.Name}"/>
+      </apex:column>
+      <apex:column headerValue="App Label">
+          <apex:outputText value="{!aitem.Label}"/>
+      </apex:column>
+      <apex:column headerValue="SortOrder">
+          <apex:outputText value="{!aitem.SortOrder}"/>
+      </apex:column>
+      <apex:column headerValue="Description">
+          <apex:outputText value="{!aitem.Description}"/>
+      </apex:column>
+      <apex:column headerValue="App Start Url">
+          <apex:outputText value="{!aitem.StartUrl}"/>
+      </apex:column>
+      <apex:column headerValue="App Logo Url">
+          <apex:outputText value="{!aitem.LogoUrl}"/>
+      </apex:column>
+      <apex:column headerValue="App Icon Url">
+          <apex:outputText value="{!aitem.IconUrl}"/>
+      </apex:column>
+      <apex:column headerValue="App Info Url">
+          <apex:outputText value="{!aitem.InfoUrl}"/>
+      </apex:column>
+      <apex:column headerValue="App Type">
+          <apex:outputText value="{!aitem.Type}"/>
+      </apex:column>
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

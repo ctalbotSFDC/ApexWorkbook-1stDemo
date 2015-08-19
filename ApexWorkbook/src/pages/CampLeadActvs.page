@@ -1,0 +1,15 @@
+<apex:page standardController="Campaign" extensions="sampleDetailPageCamp">
+    <apex:form >
+    <apex:pageMessages />
+    <apex:detail relatedList="true"></apex:detail>
+    <apex:pageblock id="CustomList" title="CJT Custom Actvs" >
+    <apex:pageBlockTable value="{!actv}" var="o" rendered="{!NOT(ISNULL(actv))}">
+    <apex:column value="{!o.ActivityDate}"/>
+    <apex:column value="{!o.ActivityType}"/>
+    </apex:pageblocktable>
+    <apex:outputlabel value="No records to display" rendered="{!(ISNULL(actv))}" styleclass="noRowsHeader"></apex:outputlabel>
+    </apex:pageblock>
+    </apex:form>
+
+
+</apex:page>

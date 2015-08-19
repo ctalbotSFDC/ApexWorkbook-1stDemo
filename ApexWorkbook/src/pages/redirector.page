@@ -1,0 +1,3 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+<script>window.top.location.href = "/apex/home";</script>
+</apex:page>

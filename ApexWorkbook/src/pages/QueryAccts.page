@@ -1,0 +1,32 @@
+<apex:page controller="QueryAcct">
+  <apex:form onsubmit="executeQuery">
+  <apex:pageBlock >
+      <apex:pageBlockTable value="{!curQuery}" var="c">
+          <apex:column headerValue="Field Name">
+              <apex:inputText value="{!c.field}"/>
+          </apex:column>
+          <apex:column headerValue="Comparison">
+              <apex:inputText value="{!c.comparison}" />
+          </apex:column>
+          <apex:column headerValue="Query Criteria">
+              <apex:inputText value="{!c.text}" />
+          </apex:column>
+          
+      </apex:pageBlockTable>
+      <apex:pageBlockSection >
+          <apex:commandButton action="{!executeQuery}" value="Execute Query" reRender="acct_list"/>
+          <apex:commandButton action="{!addQD}" value="Add Criteria" />
+      </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+  
+  <apex:pageBlock id="acct_list">
+  
+      <apex:pageBlockTable value="{!myAccts}" var="A">
+          <apex:column headerValue="Name" value="{!A.name}"/>
+          
+      </apex:pageBlockTable>
+      
+      </apex:pageBlock>
+  
+</apex:page>

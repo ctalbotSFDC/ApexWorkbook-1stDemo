@@ -1,0 +1,44 @@
+<apex:page controller="ManageLookupRollupSummariesController" showHeader="true" sidebar="true" action="{!init}">
+	<apex:form >
+		<apex:sectionHeader title="Manage Lookup Rollup Summaries"/>
+		<apex:outputLabel value="Select Lookup Rollup Summary:" />&nbsp;
+		<apex:selectList value="{!SelectedLookup}" size="1">
+			<apex:actionSupport event="onchange" action="{!load}" reRender="rollupDetailView"/>
+			<apex:selectOptions value="{!Lookups}"/>
+		</apex:selectList>
+		<p/>
+		<apex:pageMessages />
+		<apex:pageBlock mode="edit" id="rollupDetailView">
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!save}"/>
+				<apex:commandButton value="Delete" action="{!deleteX}" disabled="{!LookupRollupSummary.Id==null}"/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection title="Information" columns="2">
+				<apex:inputText value="{!LookupRollupSummary.Label}"/>
+				<apex:inputText value="{!LookupRollupSummary.DeveloperName}" disabled="{!LookupRollupSummary.Id!=null}"/>
+			</apex:pageBlockSection>		
+			<apex:pageBlockSection title="Lookup Relationship" columns="2">
+				<apex:inputText value="{!LookupRollupSummary.ParentObject__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.RelationshipField__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.ChildObject__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.RelationshipCriteria__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.RelationshipCriteriaFields__c}"/>
+			</apex:pageBlockSection>		
+			<apex:pageBlockSection title="Rollup Details" columns="2">
+				<apex:inputText value="{!LookupRollupSummary.FieldToAggregate__c}"/>
+				<apex:inputCheckbox value="{!LookupRollupSummary.Active__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.FieldToOrderBy__c}"/>				
+				<apex:inputText value="{!LookupRollupSummary.CalculationMode__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.AggregateOperation__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.CalculationSharingMode__c}"/>
+				<apex:inputText value="{!LookupRollupSummary.AggregateResultField__c}"/>
+			</apex:pageBlockSection>		
+			<apex:pageBlockSection title="Text Lookups" columns="2">
+				<apex:inputText value="{!LookupRollupSummary.ConcatenateDelimiter__c}"/>
+			</apex:pageBlockSection>		
+			<apex:pageBlockSection title="Description" columns="2">
+				<apex:inputText value="{!LookupRollupSummary.Description__c}"/>
+			</apex:pageBlockSection>		
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,11 @@
+<apex:page showHeader="False">
+<script>
+
+</script>
+<apex:tabPanel style="center">
+<apex:tab label="Test" />
+</apex:tabPanel>
+<p>This is just a test</p>
+
+ <p>Another test</p>
+</apex:page>

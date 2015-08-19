@@ -1,0 +1,244 @@
+<!--*******************************************************************
+* File Name : QuickPicksWidgets
+* Description : Component to display different widgets.
+* Copyright : Qburst Technologies Ltd 2013
+* Author : Pintu Francis
+* Modification Log
+* ===============================================================
+* Ver Date Author Modification
+* ---------------------------------------------------------------
+* 1.0 19-May-13 Pintu Francis Created
+******************************************************************** -->
+
+<apex:component >
+<apex:attribute name="handler" type="qburst_widgets.QuickPicksController" required="true" description="handle to main controller"/>
+<table width="965" cellpadding="5" cellspacing="0" align="center" border="0">
+    <tr>
+        <td id="widget_weather" class="widgets">
+            <div class="widgetbar_container">
+                <img id="weather_image" src=" " style="position: absolute; top: 45px; left: 5px; width: 174px;" />
+                <table align="center" width="100%" cellpadding="1" cellspacing="1" style="position: absolute; left: 0px; top: 0px; padding: 3px 3px 0px 3px;">
+                    <tr>
+                        <td height="16" class="widget_title"> Weather </td>
+                    </tr>
+                    <tr>
+                        <td id="weather_location" style="font-weight: bold; font-size: 15px;" align="right"> </td>
+                    </tr>
+                    <tr>
+                        <td id="weather_details" align="right"> </td>
+                    </tr>
+                </table>
+                <div class="checkbox">
+                    <input id="checkbox_weather" type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+                <div id="location_input_box" style="display: none; position: absolute; left: 7px; top: 55px;">
+                    <input id="location_input" type="text" style="width: 164px" />
+                    <button class="btn" onclick="updateWeatherLocation();"> Update </button>
+                </div>
+            </div>
+        </td>
+        <td id="widget_stock" class="widgets">
+            <div class="widgetbar_container">
+                <img src="/img/icon/custom51_100/scales64.png" style="position: absolute; top: 26px; left: 52px; opacity: 0.3; width: 130px;" />
+                <table align="center" width="100%" cellpadding="1" cellspacing="1" style="position: absolute; left: 0px; top: 0px; padding: 3px 3px 0px 3px;">
+                    <tr>
+                        <td colspan="2" align="center" class="widget_title"> US Indices </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">
+                            <h2>Dow Jones:&nbsp;<span id="DOW_index"> {!handler.UsIndicesData['DJI_index']} </span></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" width="65" height="16" style="color: #015BA7;"><b>Change:</b></td>
+                        <td id="DOW_change" style="background: #CFEEF8; color: #CFEEF8; font-weight: bold; font-family: Arial; padding: 2px;"> 
+                            {!handler.UsIndicesData['DJI_change']} ({!handler.UsIndicesData['DJI_percent']}%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">
+                            <h2>NASDAQ:&nbsp;<span id="NASDAQ_index"> {!handler.UsIndicesData['IXIC_index']} </span></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" width="65" height="16" style="color: #015BA7;"><b>Change:</b></td>
+                        <td id="NASDAQ_change" style="background: #CFEEF8; color: #CFEEF8; font-weight: bold; font-family: Arial; padding: 2px;">
+                            {!handler.UsIndicesData['IXIC_change']} ({!handler.UsIndicesData['IXIC_percent']}%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">
+                            <h2>S&amp;P 500:&nbsp;<span id="GSPC_index"> {!handler.UsIndicesData['GSPC_index']} </span></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" width="65" height="16" style="color: #015BA7;"><b>Change:</b></td>
+                        <td id="GSPC_change" style="background: #CFEEF8; color: #CFEEF8; font-weight: bold; font-family: Arial; padding: 2px;">
+                            {!handler.UsIndicesData['GSPC_change']} ({!handler.UsIndicesData['GSPC_percent']}%)
+                        </td>
+                    </tr>
+                </table>
+                <div class="checkbox"><input id="checkbox_stock"
+                    type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+            </div>
+        </td>
+        <td id="widget_clock" class="widgets">
+            <div class="widgetbar_container">
+                <img src="/img/icon/custom51_100/stopwatch64.png" style="position: absolute; top: 26px; left: 52px; opacity: 0.4; width: 130px;" />
+                <table align="center" width="100%" cellpadding="1" cellspacing="1" style="position: absolute; left: 0px; top: 0px; padding: 3px 3px 0px 3px;">
+                    <tr align="center">
+                        <td colspan="3" class="widget_title"> US Time </td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="24" width="64">
+                            <h2 style="line-height: 14px">Pacific:&nbsp;</h2>
+                        </td>
+                        <td align="left" width="36">
+                            <span id="pacific_time" style="color: #015BA7 !important; font-weight: bold; font-size: 13px;">Loading...</span>
+                        </td>
+                        <td rowspan="4" align="center">
+                            <div style="font-size: 35px; color: #015BA7 !important; line-height: 94px;">
+                                <span id="time_seconds"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="24" width="64">
+                            <h2 style="line-height: 14px">Mountain:&nbsp;</h2>
+                        </td>
+                        <td align="left" width="36">
+                            <span id="mountain_time" style="color: #015BA7 !important; font-weight: bold; font-size: 13px;">Loading...</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="24" width="64">
+                            <h2 style="line-height: 14px">Central:&nbsp;</h2>
+                        </td>
+                        <td align="left" width="36">
+                            <span id="central_time" style="color: #015BA7 !important; font-weight: bold; font-size: 13px;">Loading...</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="24" width="64">
+                            <h2 style="line-height: 14px">Eastern:&nbsp;</h2>
+                        </td>
+                        <td align="left" width="36">
+                            <span id="eastern_time" style="color: #015BA7 !important; font-weight: bold; font-size: 13px;">Loading...</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="checkbox"><input id="checkbox_clock"
+                    type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+            </div>
+        </td>
+        <td id="widget_courier" class="widgets">
+            <div class="widgetbar_container">
+                <img src="/img/icon/custom51_100/truck64.png" style="position: absolute; top: 22px; left: 52px; opacity: 0.4; width: 130px;" />
+                <apex:form >
+                    <table align="center" cellpadding="1" cellspacing="1" width="100%" style="position: absolute; left: 0px; top: 0px; padding: 3px 3px 0px 3px;">
+                        <tr align="center">
+                            <td class="widget_title"> Courier Tracking </td>
+                        </tr>
+                        <tr align="center">
+                            <td style="padding-top: 15px;">
+                                <apex:selectList id="courier_tracking_list" value="{!handler.courierService}" size="1" style="width:138px">
+                                    <apex:selectOptions value="{!handler.courierServiceList}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td style="padding-top: 7px;">
+                               <apex:inputText id="tracking_id" title="Tracking Number" style="width:136px;" />
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                               <apex:commandButton value="Track" onClick="showCourierWindow();" reRender="false"> </apex:commandButton>       
+                            </td>
+                        </tr>
+                    </table>
+                </apex:form>
+                <div class="checkbox">
+                    <input id="checkbox_courier" type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+            </div>
+        </td>
+        <td id="widget_currency" class="widgets">
+            <div class="widgetbar_container">
+                <img src="/img/icon/cash64.png" style="position: absolute; top: 26px; left: 52px; opacity: 0.4; width: 130px;" />
+                <table align="center" cellpadding="1" cellspacing="1" width="100%" style="position: absolute; left: 0px; top: 0px; padding: 3px 3px 0px 3px;">
+                    <apex:form >
+                        <tr align="center">
+                            <td class="widget_title">Currency Converter</td>
+                        </tr>
+                        <tr align="right">
+                            <td style="padding-top: 9px;">
+                                <apex:outputLabel value="From " for="currency_list_from"/>
+                                <apex:selectList id="currency_list_from" value="{!handler.currencyFrom}" size="1" style="width: 132px">
+                                    <apex:selectOptions value="{!handler.currencyList}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                        <tr align="right">
+                            <td>
+                                <apex:outputLabel value="To " for="currency_list_to"/>
+                                <apex:selectList id="currency_list_to" value="{!handler.currencyTo}" size="1" style="width: 132px">
+                                    <apex:selectOptions value="{!handler.currencyList}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                        <tr height="22px">
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td width="58%" align="right">
+                                            <apex:inputText id="currency_amount" value="{!handler.currencyAmount}" title="Amount" style="width: 60px;"/>
+                                        </td>
+                                        <td width="41%" align="left">
+                                            <div style="width:66px; overflow:auto; margin-left:2px;">
+                                                <apex:outputText id="converted_value" value="{!handler.convertedValue}" style="font-size:15px; font-weight:bold;" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <apex:commandButton action="{!handler.convertCurrency}" onClick="validateAmount();" value="Convert" reRender="converted_value"/>
+                            </td>
+                        </tr>
+                    </apex:form>
+                </table>
+                <div class="checkbox">
+                    <input id="checkbox_currency" type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7" id="widget_news" class="widgets">
+            <div class="widgetbar_container" style="width: 949px; height: 130px;">
+                <div class="widget_title" style="position: absolute; top: 54px; left: -48px; width: 120px; -webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); transform: rotate(270deg); writing-mode: lr-tb;">
+                    <b>News</b>
+                </div>
+                <img src="/img/icon/radarDish64.png" style="position: absolute; top: 11px; left: 832px; opacity: 0.4; width: 130px;" />
+                <table align="center" cellpadding="0" cellspacing="0" width="100%"
+                    style="position: absolute; left: -10px; top: 0px;">
+                    <tr>
+                        <td>
+                        <ul id="news_ticker" style="list-style: none;">
+                        </ul>
+                        </td>
+                    </tr>
+                </table>
+                <div class="checkbox" style="left: 928px;">
+                    <input id="checkbox_news" type="checkbox" checked="checked" onchange="checkboxStatus(this)" />
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</apex:component>

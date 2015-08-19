@@ -1,0 +1,331 @@
+<apex:page standardStylesheets="false" showHeader="{!isDesktop}" sidebar="false" controller="AppsController">
+<html lang="en">
+  <head>
+       
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+     
+<script src="/faces/a4j/g/3_3_3.Finalorg.ajax4jsf.javascript.AjaxScript?rel=1398474301000" type="text/javascript"></script><script src="/static/111213/js/perf/stub.js"></script><style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
+
+  </head>  
+  
+  <body>
+<meta charset="utf-8"></meta>
+    <title>Application Launcher and Favorites</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta> 
+    <!--insert css here -->
+    <link rel="stylesheet" href="{!$Resource.applicationcss}" />
+    <style>
+        #q {
+            height: 18px;
+            padding-left: 5px;
+            margin-bottom: 10px;
+            margin-top: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+        }
+        #AppBodyHeader .phHeader {
+            background-color: #610c1c;
+            }
+        
+        body.sfdcBody {
+            background-color: #610c1c;
+            background:#610c1c
+            }
+            
+            .Custom51Tab .brdPalette {
+            border-top-color: #ffffff;
+            }
+            .zen .zen-headerBottom {
+            background: linear-gradient(#ffffff, #ffffff);
+            }
+            .Custom51Tab .primaryPalette, .individualPalette .Custom51Block .primaryPalette {
+            background-color: #610c1c;
+            border-color: #610c1c;
+            }
+            
+            
+            #tsidButton, #helpNavButton, #notificationsNavButton, #userNavButton {
+            background: #610c1c;
+            }
+        
+        .headerSearchRightRoundedCorner #phSearchButton {
+        color: #610c1c;
+        }
+        .phHeaderCustomLogo #helpNavLabel, .phHeaderCustomLogo #notificationsNavLabel, .phHeaderCustomLogo #userNavLabel {
+        color: #ffffff;
+        }
+        body .phHeaderCustomLogo .multiforce .navLinks a {
+        color: #ffffff;
+        }
+        .phHeaderCustomLogo #tsidButton {
+        background-color: #610c1c;
+        }
+        .phHeader .mbrButtonArrow, .phHeaderCustomLogo .menuButtonOver .mbrButtonArrow {
+        background: url(/img/alohaSkin/header_mutton.png) 0 -129px no-repeat;
+        }
+        
+        
+        #logout {
+            margin-left:20px;
+        }
+        
+        #appcontainer {
+            padding-top:20px;        
+        }
+        
+        .fav { 
+            margin-left:10px;
+        }
+        
+        .icon {
+            margin-top:2px;
+        }
+    </style>
+<!-- navbar -->
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="logo pull-left">
+      <img style="height: 30px; margin-top: 5px" src="{!$Resource.lincoln}"/>
+    </div>
+
+     <!-- <ul class="nav pull-right" id="logout">
+      <li class="dropdown active">
+        <div class="btn-group">
+          <a class="btn btn-info btn-logout dropdown-toggle" data-toggle="dropdown" href="#">
+            {!$User.FirstName} {!$User.LastName}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="/secur/logout.jsp">Logout</a></li>
+          </ul>
+        </div>
+      </li>
+      
+    </ul>
+    <!-->
+      <style>
+          #showfav {
+            font-size:20px;
+            margin-left:20px;
+            color: #ccc;
+            margin-top:11px;
+          }
+      </style>    
+      
+      <i class="fav icon-heart-empty pull-right" id="showfav" onclick="toggleFavs();"></i>
+
+      <input type="text" class="span3 pull-right" id="q" onkeyup="search(this.value);" placeholder="Quick Find"/>
+  </div>
+</div>
+      
+<div class="container" id="appcontainer">
+  <ul class="thumbnails" id="apps" />
+</div>
+
+<!--insert JS libs here -->
+<script src="{!$Resource.applicationjs}" ></script>
+
+<script id="appTemplate" type="text/template">
+[% if(id != null) { %]
+  <li class="application-tile span3" data-app="[%= id %]">
+    
+    <a target="[%= id %]" href="[% if (url != '') { %][%= url %][% } else { %][%= info %][% } %]" class="thumbnail application">
+      <div class="image-wrapper vertically-spaced">
+        <img src="[%= logo %]" />
+      </div>
+      <div class="vertically-spaced bold">
+          <span class="application-title">[%= label %] &nbsp;</span>
+          [% if (_.contains(favorites, id)){ %]
+            <i class="fav icon-heart"></i>
+          [% } else { %]
+            <i class="fav icon-heart-empty"></i>
+          [% } %]
+                
+        [% if (info != '') { %]
+          <i class="icon icon-external-link" title="This application does not support SSO.  You may need to log in with separate username and password, if required." data-js="tooltip"></i>
+        [% } else { %]
+            <i class="icon icon-lock" title="This application supports SSO.  You will be signed in automatically." data-js="tooltip"></i>
+        [% } %]
+      </div>
+    </a>
+
+  </li>
+[% } %] 
+</script>
+
+<script id="extraTemplate" type="text/template">
+[% if(id != null) { %]
+  <li  data-app="[%= id %]">
+    
+   
+      <div class="image-wrapper vertically-spaced">
+        <iframe src="[%= logo %]" width=270px height=154px />
+      </div>
+      <div class="vertically-spaced bold">
+          <span class="application-title">[%= label %] &nbsp;</span>
+          
+      </div>
+
+  </li>
+[% } %] 
+</script>
+
+<script>
+
+    var showFavs = false;
+      
+    var appnames = [
+    <apex:repeat value="{!apps}" var="app">
+        '{!app.name}',
+    </apex:repeat>
+    ''];
+      
+      var extra = [
+      <apex:repeat value="{!extra}" var="extra">
+      { 'id': '{!extra.id}',
+                     'name': '{!extra.name}',
+                     'label': '{!extra.Label__c}',
+                     'logo': '{!extra.LogoURL__c}'
+                     }
+                     </apex:repeat>
+                     ];
+    
+    var apps = [ 
+    
+    <apex:repeat value="{!apps}" var="app">
+        
+
+        {
+            'id': '{!app.id}',
+            'name': '{!app.name}',
+            'label': '{!app.label}',
+            'category': '',
+            'url': '{!app.StartURL}',
+            'logo': '{!app.LogoURL}',
+            'info': '{!app.InfoURL}'
+        },
+    </apex:repeat>
+        { "id" : null }   
+    ];
+    
+    var favorites = {!favorites};
+    
+    _.templateSettings = {
+        interpolate:/\[\%\=(.+?)\%\]/g,
+        evaluate:/\[\%(.+?)\%\]/g
+    };
+    var template = _.template($("#appTemplate").html());
+    var extratemplate = _.template($("#extraTemplate").html());
+
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    
+    
+    <script src="../../soap/ajax/25.0/connection.js" type="text/javascript"></script>    
+    <script>
+        
+        
+            $("#apps").delegate("i[class*='icon-heart']", "click", function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                var id = $(this).parents("li").data("app");
+        
+                var index = _.indexOf(favorites, id);
+                if (index < 0) {
+                    $(this).removeClass("icon-heart-empty").addClass("icon-heart");
+                    favorites.push(id);
+                }
+                else {
+                    $(this).removeClass("icon-heart").addClass("icon-heart-empty");
+                    favorites.splice(index, 1);
+                }
+                setFavorites();
+
+            });
+        
+        
+        function setFavorites(){
+            
+            var u = new sforce.SObject("User");
+            u.id = "{!$User.Id}";
+            u.FavoriteApps__c = JSON.stringify(favorites);
+            result = sforce.connection.update([u]);
+         
+        }
+    
+   
+    function clearApps(){
+        $('#apps').empty();
+    }
+    
+    function search(q) {
+        clearApps(); 
+        for (var i=0; i < appnames.length; i++) {
+            if (appnames[i].toLowerCase().match(q.toLowerCase())) {
+                appendApp(apps[i]); 
+            }
+        }
+    }
+      
+    function toggleFavs() {
+        if ( showFavs ) {
+            $("#showfav").removeClass("icon-heart").addClass("icon-heart-empty"); 
+            showFavs = false;
+        } else {
+            $("#showfav").removeClass("icon-heart-empty").addClass("icon-heart");
+            showFavs = true;
+        }
+        $('#q').val('');
+        displayAllApps();
+    }
+      
+    
+    function appendApp(app) {
+        
+        if (showFavs) {
+            for (var i=0; i<favorites.length; i++) {
+                var fav = favorites[i];
+                if (fav == app.id) $("#apps").append(template(app));
+            }
+        } else {
+        
+            $("#apps").append(template(app));
+        }
+        
+        
+    }  
+      
+    function displayAllApps(){
+    
+            clearApps();
+            $("#apps").append(extratemplate(extra[0]));
+            for(var app in apps) {
+                var theApp = apps[app];
+                if (theApp != null) appendApp(theApp);
+            };
+            $("[data-js='tooltip']").tooltip();
+    };
+
+      
+    </script>
+    <script>
+    
+      $(document).ready(function() {
+           if ( window.location.hash.substring(1) == "favs" ) 
+               toggleFavs();
+           else
+               displayAllApps();
+      });
+      
+    </script>
+
+    
+  </body>
+</html>
+
+</apex:page>
